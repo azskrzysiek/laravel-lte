@@ -145,22 +145,34 @@ export default {
       },
       createUser()
       {
-        this.$Progress.start()
-        this.form.post('api/user');
+        
+        this.form.post('api/user')
+        .then(()=>{
+          this.$Progress.start()
+          Fire.$emit('AfterCreate');
+          $('#addNew').modal('hide')
 
-        $('#addNew').modal('hide')
-
-        Toast.fire({
-        type: 'success',
-        title: 'User created in succesfully'
-        })
+          Toast.fire({
+          type: 'success',
+          title: 'User created in succesfully'
+          })
 
         this.$Progress.finish()
+
+        })
+        .catch(()=>{
+
+        })
+        
       }
 
     },
   created() {
     this.loadUsers();
+    // setInterval(() => this.loadUsers(), 3000);
+    Fire.$on('AfterCreate',() => {
+      this.loadUsers();
+    });
   }
 };
 </script>

@@ -59,6 +59,8 @@ let routes = [
     return moment(created).format('MMMM Do YYYY');
   });
   
+  window.Fire = new Vue();
+  
 
 /**
  * The following block of code may be used to automatically register your
