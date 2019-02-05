@@ -8,13 +8,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>AdminLTE 3 | Starter</title>
 
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
         <div class="d-none">Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
         <div class="d-none">Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
@@ -72,17 +74,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                <router-link to="/dashboard" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt blue"></i>
                     <p>
                     Dashboard
                     </p>
-                </a>
+                </router-link>
                 </li>
            
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fa fa-cog"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-cog green"></i>
               <p>
                 Managment
                 <i class="right fa fa-angle-left"></i>
@@ -90,35 +92,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
+                <router-link to="/users" class="nav-link">
+                  <i class="fas fa-users nav-icon pink"></i>
+                  <p>Users Page</p>
+                </router-link>
               </li>
             </ul>
           </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
+            <router-link to="/profile" class="nav-link">
+                <i class="nav-icon fas fa-user orange"></i>
                 <p>
                 Profile
                 </p>
-            </a>
+            </router-link>
         </li>
 
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-power-off"></i>
-                <p>
-                Logout
-                </p>
+            <a class="nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    <i class="nav-icon fas fa-power-off red"></i>
+                    <p>{{ __('Logout') }}</p>
+                
             </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+            </form>
         </li>
          
         </ul>
@@ -135,7 +136,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        
+        <router-view></router-view>
+
+        <vue-progress-bar></vue-progress-bar>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
