@@ -17,8 +17,8 @@
             class="widget-user-header text-white"
             style="background-image:url('./img/user-cover.jpg')"
           >
-            <h3 class="widget-user-username">Elizabeth Pierce</h3>
-            <h5 class="widget-user-desc">Web Designer</h5>
+            <h3 class="widget-user-username">{{this.form.name}}</h3>
+            <h5 class="widget-user-desc">{{this.form.type}}</h5>
           </div>
           <div class="widget-user-image">
             <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
@@ -90,10 +90,10 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                        <label for="bio" class="col-sm-2 control-label">Experience</label>
 
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                          <textarea class="form-control" id="bio" name="bio" v-model="form.bio" placeholder="Experience"></textarea>
                         </div>
                       </div>
                       <div class="form-group">
