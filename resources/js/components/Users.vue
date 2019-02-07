@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-5" v-if="$gate.isAdmin()">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -33,6 +33,7 @@
                   <td>{{user.type | upText}}</td>
                   <td>{{user.created_at | myDate}}</td>
                   <td>
+                    
                     <a href="#" @click="editModal(user)">
                       <i class="fa fa-edit blue"></i>
                     </a>
@@ -211,7 +212,11 @@ export default {
       },
       loadUsers()
       {
-        axios.get("api/user").then(({ data }) => (this.users = data.data));
+        if(this.$gate.isAdmin){
+          axios.get("api/user").then(({ data }) => (this.users = data.data));
+        }
+        
+        
       },
       createUser()
       {
